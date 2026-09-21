@@ -53,6 +53,15 @@ header{padding:22px 0;border-bottom:1px solid var(--border)}
 .q-text{font-family:'Fira Code',monospace;font-size:1rem}
 .q-text::before{content:"> ";color:var(--green)}
 .q p{margin:0;color:var(--muted);font-size:.95rem}
+.rank{margin:4px 0 14px;padding:0;list-style:none;counter-reset:r;display:grid;gap:6px}
+.rank li{counter-increment:r;display:flex;justify-content:space-between;gap:12px;align-items:center;padding:10px 14px;border-radius:8px;background:var(--card2);font-size:.95rem}
+.rank li span::before{content:counter(r) ". ";font-family:'Fira Code',monospace;color:var(--muted)}
+.rank li em{font-style:normal;color:var(--muted);font-size:.85rem;white-space:nowrap}
+.rank li.me{background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.35)}
+.rank li.me span{color:#FBBF24;font-weight:600}
+.notes{margin:0;padding-left:18px;color:var(--muted);font-size:.95rem}
+.notes li{margin:4px 0}
+.notes b{color:var(--text)}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
 .chip{font-size:.8rem;padding:4px 12px;border-radius:20px;background:var(--card2);color:var(--text)}
 .badge{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:20px;font-size:.75rem;font-weight:600;white-space:nowrap}
@@ -149,12 +158,12 @@ footer{border-top:1px solid var(--border);padding:28px 0 36px;text-align:center;
 <main>
 <div class="wrap hero">
   <div class="eyebrow">Auditoría de visibilidad en inteligencia artificial · guzel.com.ar</div>
-  <h1>Cuando alguien le pregunta a la IA dónde hacerse las cejas, <em>Güzel no aparece.</em></h1>
-  <p>Si la persona pregunta por "Güzel" con nombre y apellido, la IA la encuentra y la describe bien. Si pregunta en general, que es como busca alguien que todavía no las conoce, recomienda a otros. El problema está en cómo está construida la web: gran parte de lo que ve una persona, la IA no lo ve.</p>
+  <h1>Cuando alguien le pregunta a la IA dónde hacerse las cejas, <em>Güzel queda cuarta. O no aparece.</em></h1>
+  <p>La marca que trajo el threading al país sale detrás de estudios con menos reseñas, y cuando la pregunta es por precio, directamente no aparece. El problema está en cómo está construida la web: gran parte de lo que ve una persona, la IA no lo ve.</p>
   <div class="meta">Revisión realizada el 22 de septiembre de 2026</div>
 
   <div class="stats">
-    <div class="stat"><b>0 de 2</b><span>búsquedas generales en las que aparece Güzel</span></div>
+    <div class="stat"><b>#4</b><span>lugar de Güzel cuando se pregunta por el mejor lugar para depilarse con hilo</span></div>
     <div class="stat"><b>6</b><span>páginas de la web que le llegan en blanco a la IA</span></div>
     <div class="stat"><b>0</b><span>precios que la IA puede leer, de los más de 20 publicados solo en Cejas</span></div>
     <div class="stat"><b>5</b><span>respuestas sobre threading que la IA no puede leer</span></div>
@@ -165,22 +174,28 @@ footer{border-top:1px solid var(--border);padding:28px 0 36px;text-align:center;
   <div class="wrap">
     <div class="eyebrow">01 · Lo que responde la IA hoy</div>
     <h2>Le preguntamos lo mismo que preguntaría una clienta nueva</h2>
-    <p class="lead">Estas son las recomendaciones que devolvió la búsqueda. Güzel fue la primera en traer el threading al país, pero en ninguna búsqueda general aparece.</p>
+    <p class="lead">Consultamos Perplexity, uno de los buscadores con inteligencia artificial más usados, el 22 de septiembre de 2026.</p>
 
     <div class="queries">
       <div class="q">
-        <div class="q-head"><div class="q-text">depilación con hilo cejas Buenos Aires mejor lugar</div><span class="badge b-red">Güzel no aparece</span></div>
-        <p>La IA recomienda:</p>
-        <div class="chips"><span class="chip">AgendaPro</span><span class="chip">Silvana Bustos Studio</span><span class="chip">ZG Brow Studio</span><span class="chip">Solo Cejas</span><span class="chip">Cejas &amp; Co</span></div>
+        <div class="q-head"><div class="q-text">depilación con hilo cejas Buenos Aires mejor lugar</div><span class="badge b-orange">Güzel sale cuarta</span></div>
+        <ol class="rank">
+          <li><span>ZG Brow Studio</span><em>4,9 · 60 reseñas</em></li>
+          <li><span>Depilash</span><em>4,8 · 46 reseñas</em></li>
+          <li><span>MAKENDI Estética</span><em>4,8 · 199 reseñas</em></li>
+          <li class="me"><span>Güzel Palermo Soho</span><em>4,5 · 338 reseñas</em></li>
+          <li><span>Nala Beauty</span><em>4,9 · 251 reseñas</em></li>
+        </ol>
+        <ul class="notes">
+          <li>La recomendación principal es otro estudio, que tiene menos de un quinto de las reseñas de Güzel.</li>
+          <li>A Güzel la describe con "opiniones mixtas sobre la rapidez del servicio".</li>
+          <li>El enlace que pone para Güzel lleva a <b>guzel.com</b>, que no es su web.</li>
+          <li>De guzel.com.ar no toma nada.</li>
+        </ul>
       </div>
       <div class="q">
         <div class="q-head"><div class="q-text">perfilado de cejas con hilo precio Palermo</div><span class="badge b-red">Güzel no aparece</span></div>
-        <p>La IA responde con precios de otros locales:</p>
-        <div class="chips"><span class="chip">Cejas Prolijas</span><span class="chip">Sempre Bella</span><span class="chip">Estética Funcional</span><span class="chip">Indigo MakeUp</span><span class="chip">Quiero mis cejas</span></div>
-      </div>
-      <div class="q">
-        <div class="q-head"><div class="q-text">brow bar threading Buenos Aires Guzel</div><span class="badge b-orange">Aparece, solo si la nombran</span></div>
-        <p>Cuando la persona ya escribe "Guzel", la IA la encuentra, pero sobre todo a través de LinkedIn, Foursquare, Facebook e Instagram, más que de la propia web.</p>
+        <p>Responde con precios de otros locales, de $15.030 a $28.000, citando a CejasPro y AgendaPro. Los precios de Güzel, que están publicados en su web, no aparecen.</p>
       </div>
     </div>
   </div>
@@ -249,7 +264,7 @@ footer{border-top:1px solid var(--border);padding:28px 0 36px;text-align:center;
       <div class="f"><div class="n">Hallazgo 4</div><h3>La web no está preparada para la IA</h3></div>
       <div class="f"><div class="n">Hallazgo 5</div><h3>La web existe dos veces</h3></div>
       <div class="f"><div class="n">Hallazgo 6</div><h3>Los datos de la marca se contradicen</h3></div>
-      <div class="f"><div class="n">Hallazgo 7</div><h3>Un directorio se queda con las búsquedas</h3></div>
+      <div class="f"><div class="n">Hallazgo 7</div><h3>Un directorio de salones se queda con la búsqueda de precios</h3></div>
     </div>
   </div>
 </section>
@@ -262,7 +277,7 @@ footer{border-top:1px solid var(--border);padding:28px 0 36px;text-align:center;
     <div class="good">
       <div class="g"><h3>Sucursales</h3><p>Es la página que mejor se lee: dirección, teléfono y horario de cada local.</p></div>
       <div class="g"><h3>Historia de marca</h3><p>"Quiénes somos" llega completo, y la IA ya usa ese texto para describir a Güzel.</p></div>
-      <div class="g"><h3>Presencia fuera de la web</h3><p>Instagram, Facebook, LinkedIn y Foursquare hablan de Güzel. Por eso la IA la encuentra cuando la nombran.</p></div>
+      <div class="g"><h3>Presencia fuera de la web</h3><p>Instagram, Facebook y LinkedIn hablan de Güzel, y solo el local de Palermo Soho tiene 338 reseñas.</p></div>
     </div>
   </div>
 </section>
@@ -275,7 +290,7 @@ footer{border-top:1px solid var(--border);padding:28px 0 36px;text-align:center;
       <p>Los servicios, los precios y el contenido sobre threading ya están hechos, pero para la inteligencia artificial esa parte de la web no existe. Mientras tanto, locales más chicos y con menos trayectoria ocupan ese lugar.</p>
       <p>Es algo que tiene arreglo, y la marca tiene con qué. Lo conversamos cuando quieras.</p>
     </div>
-    <p class="method" style="margin-top:28px">Cómo se hizo esta revisión: se recorrió guzel.com.ar leyendo cada página tal como la recibe un robot de inteligencia artificial, se comparó con lo que ve una persona en el navegador y se consultaron búsquedas representativas el 22/09/2026. Los resultados de búsqueda pueden variar según el día, el dispositivo y la plataforma.</p>
+    <p class="method" style="margin-top:28px">Cómo se hizo esta revisión: se recorrió guzel.com.ar leyendo cada página tal como la recibe un robot de inteligencia artificial, se comparó con lo que ve una persona en el navegador y se consultó Perplexity con búsquedas representativas el 22/09/2026. Los resultados de búsqueda pueden variar según el día, el dispositivo y la plataforma.</p>
   </div>
 </section>
 </main>
