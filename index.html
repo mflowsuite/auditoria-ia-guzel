@@ -62,6 +62,11 @@ header{padding:22px 0;border-bottom:1px solid var(--border)}
 .notes{margin:0;padding-left:18px;color:var(--muted);font-size:.95rem}
 .notes li{margin:4px 0}
 .notes b{color:var(--text)}
+.shots{display:grid;grid-template-columns:1fr;gap:18px}
+.shot a{display:block;cursor:zoom-in}
+.shot{margin:0;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:12px}
+.shot img{display:block;width:100%;height:auto;border-radius:8px;border:1px solid var(--border);background:#fff}
+.shot figcaption{color:var(--muted);font-size:.95rem}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
 .chip{font-size:.8rem;padding:4px 12px;border-radius:20px;background:var(--card2);color:var(--text)}
 .badge{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:20px;font-size:.75rem;font-weight:600;white-space:nowrap}
@@ -119,7 +124,7 @@ footer{border-top:1px solid var(--border);padding:28px 0 36px;text-align:center;
 
 @media (max-width:860px){
   .stats{grid-template-columns:repeat(2,1fr)}
-  .vs,.finds,.good{grid-template-columns:1fr}
+  .vs,.finds,.good,.shots{grid-template-columns:1fr}
 }
 @media (max-width:600px){
   section{padding:44px 0}
@@ -158,23 +163,43 @@ footer{border-top:1px solid var(--border);padding:28px 0 36px;text-align:center;
 <main>
 <div class="wrap hero">
   <div class="eyebrow">Auditoría de visibilidad en inteligencia artificial · guzel.com.ar</div>
-  <h1>Cuando alguien le pregunta a la IA dónde hacerse las cejas, <em>Güzel queda cuarta. O no aparece.</em></h1>
-  <p>La marca que trajo el threading al país sale detrás de estudios con menos reseñas, y cuando la pregunta es por precio, directamente no aparece. El problema está en cómo está construida la web: gran parte de lo que ve una persona, la IA no lo ve.</p>
+  <h1>Cuando alguien busca dónde hacerse las cejas, <em>Google no muestra a Güzel.</em></h1>
+  <p>Buscamos lo mismo que buscaría una clienta nueva. En Google, Güzel no está entre los locales destacados ni en la respuesta de la inteligencia artificial. En Perplexity, otro buscador con IA, sale cuarta, detrás de estudios con menos reseñas. El problema está en cómo está construida la web: gran parte de lo que ve una persona, la IA no lo ve.</p>
   <div class="meta">Revisión realizada el 22 de septiembre de 2026</div>
 
   <div class="stats">
-    <div class="stat"><b>#4</b><span>lugar de Güzel cuando se pregunta por el mejor lugar para depilarse con hilo</span></div>
+    <div class="stat"><b>0</b><span>veces que la IA de Google nombra a Güzel cuando se pregunta por precios</span></div>
+    <div class="stat"><b>#4</b><span>lugar de Güzel en Perplexity como mejor lugar para depilarse con hilo</span></div>
     <div class="stat"><b>6</b><span>páginas de la web que le llegan en blanco a la IA</span></div>
     <div class="stat"><b>0</b><span>precios que la IA puede leer, de los más de 20 publicados solo en Cejas</span></div>
-    <div class="stat"><b>5</b><span>respuestas sobre threading que la IA no puede leer</span></div>
   </div>
 </div>
 
 <section class="fi">
   <div class="wrap">
-    <div class="eyebrow">01 · Lo que responde la IA hoy</div>
-    <h2>Le preguntamos lo mismo que preguntaría una clienta nueva</h2>
-    <p class="lead">Consultamos Perplexity, uno de los buscadores con inteligencia artificial más usados, el 22 de septiembre de 2026.</p>
+    <div class="eyebrow">01 · Lo que muestra Google hoy</div>
+    <h2>Dos búsquedas, ninguna con Güzel</h2>
+    <p class="lead">Búsquedas hechas en Google desde Buenos Aires el 22 de septiembre de 2026, tal como se ven en pantalla.</p>
+    <div class="shots">
+      <figure class="shot">
+        <div class="q-head"><div class="q-text">depilación con hilo cejas Buenos Aires</div><span class="badge b-red">Güzel no aparece</span></div>
+        <a href="google-hilo.png" target="_blank" rel="noopener"><img src="google-hilo.png" alt="Resultado de Google: empresas destacadas Nala Beauty, Quiero Mis Cejas y Cejas Prolijas" loading="lazy"></a>
+        <figcaption>Google destaca a Nala Beauty, Quiero Mis Cejas y Cejas Prolijas &amp; Skincare. Güzel no está en los primeros lugares ni en el mapa.</figcaption>
+      </figure>
+      <figure class="shot">
+        <div class="q-head"><div class="q-text">perfilado de cejas con hilo precio Palermo</div><span class="badge b-red">Güzel no aparece</span></div>
+        <a href="google-precio.png" target="_blank" rel="noopener"><img src="google-precio.png" alt="Visión general creada por IA de Google con precios de perfilado, citando masquecejas.com y AgendaPro" loading="lazy"></a>
+        <figcaption>La respuesta de la IA de Google da precios de otros locales y cita a masquecejas.com y AgendaPro. Los precios de Güzel, publicados en su web, no aparecen.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="fi">
+  <div class="wrap">
+    <div class="eyebrow">02 · Lo que responde Perplexity</div>
+    <h2>Otro buscador con IA, el mismo resultado</h2>
+    <p class="lead">Las mismas preguntas en Perplexity, uno de los buscadores con inteligencia artificial más usados, el 22 de septiembre de 2026.</p>
 
     <div class="queries">
       <div class="q">
@@ -203,7 +228,7 @@ footer{border-top:1px solid var(--border);padding:28px 0 36px;text-align:center;
 
 <section class="fi">
   <div class="wrap">
-    <div class="eyebrow">02 · La misma página, dos miradas</div>
+    <div class="eyebrow">03 · La misma página, dos miradas</div>
     <h2>Lo que ve tu clienta y lo que ve la IA</h2>
     <p class="lead">La página de Styling de Cejas, tal como la reciben una persona y un robot de inteligencia artificial.</p>
 
@@ -227,7 +252,7 @@ footer{border-top:1px solid var(--border);padding:28px 0 36px;text-align:center;
 
 <section class="fi">
   <div class="wrap">
-    <div class="eyebrow">03 · Página por página</div>
+    <div class="eyebrow">04 · Página por página</div>
     <h2>Qué puede leer la IA de cada sección</h2>
     <p class="lead">Recorrimos la web como la recorre un robot de inteligencia artificial.</p>
 
@@ -253,7 +278,7 @@ footer{border-top:1px solid var(--border);padding:28px 0 36px;text-align:center;
 
 <section class="fi">
   <div class="wrap">
-    <div class="eyebrow">04 · Otros hallazgos</div>
+    <div class="eyebrow">05 · Otros hallazgos</div>
     <h2>Lo que encontramos además</h2>
     <p class="lead">Además de las páginas en blanco, encontramos esto.</p>
 
@@ -271,7 +296,7 @@ footer{border-top:1px solid var(--border);padding:28px 0 36px;text-align:center;
 
 <section class="fi">
   <div class="wrap">
-    <div class="eyebrow">05 · Lo que está bien</div>
+    <div class="eyebrow">06 · Lo que está bien</div>
     <h2>La base existe</h2>
     <p class="lead">No se parte de cero. Hay tres cosas que ya juegan a favor.</p>
     <div class="good">
@@ -290,7 +315,7 @@ footer{border-top:1px solid var(--border);padding:28px 0 36px;text-align:center;
       <p>Los servicios, los precios y el contenido sobre threading ya están hechos, pero para la inteligencia artificial esa parte de la web no existe. Mientras tanto, locales más chicos y con menos trayectoria ocupan ese lugar.</p>
       <p>Es algo que tiene arreglo, y la marca tiene con qué. Lo conversamos cuando quieras.</p>
     </div>
-    <p class="method" style="margin-top:28px">Cómo se hizo esta revisión: se recorrió guzel.com.ar leyendo cada página tal como la recibe un robot de inteligencia artificial, se comparó con lo que ve una persona en el navegador y se consultó Perplexity con búsquedas representativas el 22/09/2026. Los resultados de búsqueda pueden variar según el día, el dispositivo y la plataforma.</p>
+    <p class="method" style="margin-top:28px">Cómo se hizo esta revisión: se recorrió guzel.com.ar leyendo cada página tal como la recibe un robot de inteligencia artificial, se comparó con lo que ve una persona en el navegador, y se hicieron búsquedas representativas en Google y Perplexity el 22/09/2026. Los resultados de búsqueda pueden variar según el día, el dispositivo y la plataforma.</p>
   </div>
 </section>
 </main>
