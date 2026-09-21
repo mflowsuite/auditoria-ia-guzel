@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Auditoría IA · Güzel</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+<link rel="apple-touch-icon" href="apple-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#020617;--card:#0F172A;--card2:#1E293B;--green:#22C55E;--text:#F8FAFC;--muted:#94A3B8;
+  --border:#1E293B;--blue:#3B82F6;--orange:#F59E0B;--red:#EF4444;--gray:#475569;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:auto}
+body{margin:0;background:var(--bg);color:var(--text);font-family:'Fira Sans',sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'Fira Code',monospace;line-height:1.25;margin:0}
+a{color:inherit}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+section{padding:56px 0;border-top:1px solid var(--border)}
+.eyebrow{font-family:'Fira Code',monospace;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:12px}
+h2{font-size:clamp(1.35rem,3vw,1.75rem);margin-bottom:10px}
+.lead{color:var(--muted);max-width:680px;margin:0 0 28px}
+
+/* Encabezado */
+header{padding:22px 0;border-bottom:1px solid var(--border)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:'Fira Code',monospace;font-weight:600}
+.brand img{width:34px;height:34px;border-radius:50%}
+.client{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:.85rem}
+.client .pill{background:#fff;border-radius:10px;padding:6px 12px;display:flex}
+.client .pill img{height:26px;width:auto}
+
+/* Portada */
+.hero{padding-top:72px;padding-bottom:56px}
+.hero h1{font-size:clamp(1.8rem,5vw,3rem);max-width:860px;margin-bottom:22px}
+.hero h1 em{font-style:normal;color:var(--red)}
+.hero p{color:var(--muted);font-size:1.1rem;max-width:720px;margin:0}
+.meta{margin-top:22px;font-size:.85rem;color:var(--gray)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:44px}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px}
+.stat b{display:block;font-family:'Fira Code',monospace;font-size:2.2rem;line-height:1;color:var(--red);margin-bottom:8px}
+.stat span{color:var(--muted);font-size:.9rem}
+
+/* Búsquedas */
+.queries{display:grid;gap:14px}
+.q{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px}
+.q-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.q-text{font-family:'Fira Code',monospace;font-size:1rem}
+.q-text::before{content:"> ";color:var(--green)}
+.q p{margin:0;color:var(--muted);font-size:.95rem}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.chip{font-size:.8rem;padding:4px 12px;border-radius:20px;background:var(--card2);color:var(--text)}
+.badge{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:20px;font-size:.75rem;font-weight:600;white-space:nowrap}
+.b-red{background:rgba(239,68,68,.12);color:#F87171;border:1px solid rgba(239,68,68,.3)}
+.b-orange{background:rgba(245,158,11,.12);color:#FBBF24;border:1px solid rgba(245,158,11,.3)}
+.b-green{background:rgba(34,197,94,.12);color:var(--green);border:1px solid rgba(34,197,94,.3)}
+
+/* Comparación */
+.vs{display:grid;grid-template-columns:1.35fr 1fr;gap:18px;align-items:stretch}
+.pane{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.pane-h{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--border);font-size:.85rem;color:var(--muted)}
+.dot{width:8px;height:8px;border-radius:50%}
+.pane img{display:block;width:100%;height:auto}
+.robot{flex:1;font-family:'Fira Code',monospace;font-size:.85rem;padding:18px;color:var(--muted);display:flex;flex-direction:column;gap:10px;background:#050b1c}
+.robot .ln{color:var(--gray)}
+.robot .empty{flex:1;display:flex;align-items:center;justify-content:center;border:1px dashed #334155;border-radius:8px;min-height:180px;color:#F87171;text-align:center;padding:16px}
+.caption{margin-top:16px;font-size:1.05rem}
+.caption strong{color:var(--red)}
+
+/* Tabla por página */
+.tbl{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.tbl th,.tbl td{text-align:left;padding:14px 16px;border-bottom:1px solid var(--border);vertical-align:top;font-size:.95rem}
+.tbl th{font-family:'Fira Code',monospace;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--card2)}
+.tbl tr:last-child td{border-bottom:none}
+.tbl td:first-child{font-weight:600;white-space:nowrap}
+.tbl td.what{color:var(--muted)}
+
+/* Hallazgos */
+.finds{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.f{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px;transition:transform 200ms ease,box-shadow 200ms ease}
+.f:hover{transform:translateY(-2px);box-shadow:0 10px 15px rgba(0,0,0,.25)}
+.f .n{font-family:'Fira Code',monospace;color:var(--red);font-size:.8rem;margin-bottom:6px}
+.f h3{font-size:1.02rem;margin-bottom:8px}
+.f p{margin:0;color:var(--muted);font-size:.95rem}
+
+.good{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.g{background:var(--card);border:1px solid rgba(34,197,94,.25);border-radius:12px;padding:20px}
+.g h3{font-size:.98rem;margin-bottom:6px;color:var(--green)}
+.g p{margin:0;color:var(--muted);font-size:.92rem}
+
+.closing{background:linear-gradient(180deg,var(--card),var(--bg));border:1px solid var(--border);border-radius:16px;padding:36px}
+.closing h2{margin-bottom:14px}
+.closing p{color:var(--muted);max-width:760px;margin:0 0 14px}
+.closing p:last-child{margin:0}
+.closing strong{color:var(--text)}
+
+.method{font-size:.85rem;color:var(--gray);max-width:760px}
+
+footer{border-top:1px solid var(--border);padding:28px 0 36px;text-align:center;color:var(--gray);font-size:.8rem}
+
+/* Aparición al hacer scroll */
+.fi{opacity:0;transform:translateY(24px);transition:opacity 500ms ease,transform 500ms ease}
+.fi.vis{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.fi{opacity:1;transform:none;transition:none}.f{transition:none}}
+
+@media (max-width:860px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .vs,.finds,.good{grid-template-columns:1fr}
+}
+@media (max-width:600px){
+  section{padding:44px 0}
+  .hero{padding-top:48px;padding-bottom:40px}
+  .tbl thead{display:none}
+  .tbl,.tbl tbody,.tbl tr,.tbl td{display:block;width:100%}
+  .tbl tr{border-bottom:1px solid var(--border);padding:8px 0}
+  .tbl td{border:none;padding:6px 16px}
+  .client span{display:none}
+}
+
+/* Badge Powered by MflowSuite */
+#hl-pw-scene{position:relative;display:inline-block;margin-top:.75rem}
+#hl-pw-row{display:inline-flex;align-items:center;font-family:'Fira Sans',sans-serif;font-size:11px;font-weight:600;white-space:nowrap;color:rgba(255,255,255,.55)}
+.hl-pw-by{color:rgba(255,255,255,.3)}
+#hl-pw-slot{display:inline-block;width:28px;height:28px;margin:0 5px;vertical-align:middle;flex-shrink:0}
+#hl-pw-logo{position:absolute;top:0;left:0;width:28px;height:28px;border-radius:50%;object-fit:cover;pointer-events:none}
+#hl-pw-chars .pw-ch{display:inline-block}
+#hl-pw-logo.pw-glow{filter:drop-shadow(0 0 6px rgba(59,130,246,.9))}
+.hl-pw-wrap{text-align:center;padding:12px 0 4px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="https://mflowsuite.com/" target="_blank" rel="noopener">
+      <img src="https://reviews.mflowsuite.com/assets/mflowsuite-logo.png" alt="MflowSuite">MflowSuite
+    </a>
+    <div class="client"><span>Auditoría preparada para</span><div class="pill"><img src="guzel-logo.png" alt="Güzel"></div></div>
+  </div>
+</header>
+
+<main>
+<div class="wrap hero">
+  <div class="eyebrow">Auditoría de visibilidad en inteligencia artificial · guzel.com.ar</div>
+  <h1>Cuando alguien le pregunta a la IA dónde hacerse las cejas, <em>Güzel no aparece.</em></h1>
+  <p>Si la persona pregunta por "Güzel" con nombre y apellido, la IA la encuentra y la describe bien. Si pregunta en general, que es como busca alguien que todavía no las conoce, recomienda a otros. El problema está en cómo está construida la web: gran parte de lo que ve una persona, la IA no lo ve.</p>
+  <div class="meta">Revisión realizada el 22 de septiembre de 2026</div>
+
+  <div class="stats">
+    <div class="stat"><b>0 de 2</b><span>búsquedas generales en las que aparece Güzel</span></div>
+    <div class="stat"><b>6</b><span>páginas de la web que le llegan en blanco a la IA</span></div>
+    <div class="stat"><b>0</b><span>precios que la IA puede leer, de los más de 20 publicados solo en Cejas</span></div>
+    <div class="stat"><b>5</b><span>respuestas sobre threading que la IA no puede leer</span></div>
+  </div>
+</div>
+
+<section class="fi">
+  <div class="wrap">
+    <div class="eyebrow">01 · Lo que responde la IA hoy</div>
+    <h2>Le preguntamos lo mismo que preguntaría una clienta nueva</h2>
+    <p class="lead">Estas son las recomendaciones que devolvió la búsqueda. Güzel fue la primera en traer el threading al país, pero en ninguna búsqueda general aparece.</p>
+
+    <div class="queries">
+      <div class="q">
+        <div class="q-head"><div class="q-text">depilación con hilo cejas Buenos Aires mejor lugar</div><span class="badge b-red">Güzel no aparece</span></div>
+        <p>La IA recomienda:</p>
+        <div class="chips"><span class="chip">AgendaPro</span><span class="chip">Silvana Bustos Studio</span><span class="chip">ZG Brow Studio</span><span class="chip">Solo Cejas</span><span class="chip">Cejas &amp; Co</span></div>
+      </div>
+      <div class="q">
+        <div class="q-head"><div class="q-text">perfilado de cejas con hilo precio Palermo</div><span class="badge b-red">Güzel no aparece</span></div>
+        <p>La IA responde con precios de otros locales:</p>
+        <div class="chips"><span class="chip">Cejas Prolijas</span><span class="chip">Sempre Bella</span><span class="chip">Estética Funcional</span><span class="chip">Indigo MakeUp</span><span class="chip">Quiero mis cejas</span></div>
+      </div>
+      <div class="q">
+        <div class="q-head"><div class="q-text">brow bar threading Buenos Aires Guzel</div><span class="badge b-orange">Aparece, solo si la nombran</span></div>
+        <p>Cuando la persona ya escribe "Guzel", la IA la encuentra, pero sobre todo a través de LinkedIn, Foursquare, Facebook e Instagram, más que de la propia web.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="fi">
+  <div class="wrap">
+    <div class="eyebrow">02 · La misma página, dos miradas</div>
+    <h2>Lo que ve tu clienta y lo que ve la IA</h2>
+    <p class="lead">La página de Styling de Cejas, tal como la reciben una persona y un robot de inteligencia artificial.</p>
+
+    <div class="vs">
+      <div class="pane">
+        <div class="pane-h"><span class="dot" style="background:var(--green)"></span>Lo que ve una persona · guzel.com.ar/servicios/styling-cejas</div>
+        <img src="cejas-persona.png" alt="Página de Styling de Cejas de Güzel con la lista de servicios y precios" loading="lazy">
+      </div>
+      <div class="pane">
+        <div class="pane-h"><span class="dot" style="background:var(--red)"></span>Lo que recibe la IA · misma dirección</div>
+        <div class="robot">
+          <div class="ln">GET /servicios/styling-cejas</div>
+          <div class="ln">200 OK · título: (ninguno)</div>
+          <div class="empty">Página vacía.<br>Sin servicios, sin precios, sin texto.</div>
+        </div>
+      </div>
+    </div>
+    <p class="caption">Más de 20 servicios con precio para una persona. <strong>Nada para la IA.</strong></p>
+  </div>
+</section>
+
+<section class="fi">
+  <div class="wrap">
+    <div class="eyebrow">03 · Página por página</div>
+    <h2>Qué puede leer la IA de cada sección</h2>
+    <p class="lead">Recorrimos la web como la recorre un robot de inteligencia artificial.</p>
+
+    <table class="tbl">
+      <thead><tr><th>Página</th><th>Estado</th><th>Qué recibe la IA</th></tr></thead>
+      <tbody>
+        <tr><td>Inicio</td><td><span class="badge b-orange">Casi vacía</span></td><td class="what">Una sola frase: "Descargá nuestra app, encontrá la sucursal más cercana…". Nada sobre qué es Güzel ni qué servicios ofrece.</td></tr>
+        <tr><td>Styling de Cejas</td><td><span class="badge b-red">En blanco</span></td><td class="what">Nada. Ni siquiera el menú.</td></tr>
+        <tr><td>Styling de Pestañas</td><td><span class="badge b-red">En blanco</span></td><td class="what">Nada.</td></tr>
+        <tr><td>Promociones</td><td><span class="badge b-red">En blanco</span></td><td class="what">Nada.</td></tr>
+        <tr><td>Franquicias</td><td><span class="badge b-red">En blanco</span></td><td class="what">Nada.</td></tr>
+        <tr><td>Cursos</td><td><span class="badge b-red">En blanco</span></td><td class="what">Nada.</td></tr>
+        <tr><td>Contacto</td><td><span class="badge b-red">En blanco</span></td><td class="what">Nada.</td></tr>
+        <tr><td>Servicios</td><td><span class="badge b-orange">Solo títulos</span></td><td class="what">Los nombres de las categorías, sin descripción.</td></tr>
+        <tr><td>Threading</td><td><span class="badge b-orange">Preguntas sin respuesta</span></td><td class="what">Ve "¿Qué es el threading?" y "¿Por qué decirle no a la cera?", pero no las respuestas.</td></tr>
+        <tr><td>Sucursales</td><td><span class="badge b-green">Se lee bien</span></td><td class="what">Direcciones, teléfonos y horarios de cada local.</td></tr>
+        <tr><td>Quiénes somos</td><td><span class="badge b-green">Se lee bien</span></td><td class="what">La historia completa de la marca.</td></tr>
+        <tr><td>Home Care</td><td><span class="badge b-green">Se lee bien</span></td><td class="what">Los productos con su descripción.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="fi">
+  <div class="wrap">
+    <div class="eyebrow">04 · Otros hallazgos</div>
+    <h2>Lo que le resta a la marca frente a la IA</h2>
+    <p class="lead">Además de las páginas en blanco, encontramos esto.</p>
+
+    <div class="finds">
+      <div class="f"><div class="n">Hallazgo 1</div><h3>El mejor contenido está escondido</h3><p>Los textos sobre threading y por qué es mejor que la cera, la pinza o la maquinita son justo lo que la IA cita cuando alguien pregunta. Hoy no los puede leer, y esas respuestas se las lleva la competencia.</p></div>
+      <div class="f"><div class="n">Hallazgo 2</div><h3>Los precios existen, pero la IA no los ve</h3><p>La web publica los precios de cada servicio, pero cuando alguien le pregunta a la IA cuánto sale un perfilado, responde con precios de otros locales.</p></div>
+      <div class="f"><div class="n">Hallazgo 3</div><h3>Las páginas no tienen nombre</h3><p>Salvo el inicio, ninguna página tiene título ni descripción. Para un buscador, son páginas sin nombre.</p></div>
+      <div class="f"><div class="n">Hallazgo 4</div><h3>La web no está preparada para la IA</h3><p>Le faltan los elementos básicos que usan Google y las inteligencias artificiales para recorrer un sitio y entender qué ofrece.</p></div>
+      <div class="f"><div class="n">Hallazgo 5</div><h3>La IA no sabe que Güzel tiene locales</h3><p>Nada en la web le indica que Güzel es un negocio con sucursales, horarios y teléfonos. La lista de sucursales se puede leer, pero no está en el formato con el que la IA reconoce un local físico.</p></div>
+      <div class="f"><div class="n">Hallazgo 6</div><h3>La web existe dos veces</h3><p>guzel.com.ar y www.guzel.com.ar responden por separado, como si fueran dos sitios distintos. La autoridad de la marca queda repartida entre las dos.</p></div>
+      <div class="f"><div class="n">Hallazgo 7</div><h3>Los datos se contradicen</h3><p>La web dice "desde 2015", LinkedIn y otros sitios dicen 2013, y el pie de página dice 2023. Cuando la información no coincide, la IA confía menos en la marca.</p></div>
+      <div class="f"><div class="n">Hallazgo 8</div><h3>Un directorio se queda con las búsquedas</h3><p>En la búsqueda general, lo primero que cita la IA es AgendaPro, un directorio de salones. Güzel no está en los listados que la IA toma como referencia.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="fi">
+  <div class="wrap">
+    <div class="eyebrow">05 · Lo que está bien</div>
+    <h2>La base existe</h2>
+    <p class="lead">No se parte de cero. Hay tres cosas que ya juegan a favor.</p>
+    <div class="good">
+      <div class="g"><h3>Sucursales</h3><p>Es la página que mejor se lee: dirección, teléfono y horario de cada local.</p></div>
+      <div class="g"><h3>Historia de marca</h3><p>"Quiénes somos" llega completo, y la IA ya usa ese texto para describir a Güzel.</p></div>
+      <div class="g"><h3>Presencia fuera de la web</h3><p>Instagram, Facebook, LinkedIn y Foursquare hablan de Güzel. Por eso la IA la encuentra cuando la nombran.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="fi">
+  <div class="wrap">
+    <div class="closing">
+      <h2>Qué significa esto</h2>
+      <p>Cada vez más gente busca preguntándole a ChatGPT, a Gemini o al resumen con IA de Google en lugar de recorrer resultados. En esas respuestas no hay una lista de diez enlaces: hay tres o cuatro nombres. <strong>Hoy, Güzel no es uno de ellos.</strong></p>
+      <p>Los servicios, los precios y el contenido sobre threading ya están hechos, pero para la inteligencia artificial esa parte de la web no existe. Mientras tanto, locales más chicos y con menos trayectoria ocupan ese lugar.</p>
+      <p>Es algo que tiene arreglo, y la marca tiene con qué. Lo conversamos cuando quieras.</p>
+    </div>
+    <p class="method" style="margin-top:28px">Cómo se hizo esta revisión: se recorrió guzel.com.ar leyendo cada página tal como la recibe un robot de inteligencia artificial, se comparó con lo que ve una persona en el navegador y se consultaron búsquedas representativas el 22/09/2026. Los resultados de búsqueda pueden variar según el día, el dispositivo y la plataforma.</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    Informe confidencial preparado por MflowSuite para Güzel · Septiembre 2026
+    <div class="hl-pw-wrap">
+      <a href="https://mflowsuite.com/" target="_blank" rel="noopener" style="text-decoration:none;display:inline-block;">
+        <div id="hl-pw-scene">
+          <div id="hl-pw-row" style="opacity:0;">
+            <span class="hl-pw-by">Powered by&nbsp;</span>
+            <span id="hl-pw-slot"></span>
+            <span id="hl-pw-chars"></span>
+          </div>
+          <img id="hl-pw-logo" src="https://reviews.mflowsuite.com/assets/mflowsuite-logo.png" alt="MflowSuite">
+        </div>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');observer.unobserve(e.target);}});
+},{threshold:0.07});
+document.querySelectorAll('.fi').forEach(el=>observer.observe(el));
+
+setTimeout(function() {
+  var BRAND='MflowSuite', LS=28, HD=290, FHD=680, SQD=480, LSQ=500, ID=650, THR=0.2;
+  var scene=document.getElementById('hl-pw-scene'),
+      row=document.getElementById('hl-pw-row'),
+      charsEl=document.getElementById('hl-pw-chars'),
+      slotEl=document.getElementById('hl-pw-slot'),
+      logo=document.getElementById('hl-pw-logo');
+  if(!scene||!row||!charsEl||!slotEl||!logo) return;
+  var spans=[];
+  for(var i=0;i<BRAND.length;i++){
+    var s=document.createElement('span');
+    s.className='pw-ch'; s.textContent=BRAND[i];
+    s.style.color='rgba(255,255,255,.55)'; s.style.fontWeight='600';
+    charsEl.appendChild(s); spans.push(s);
+  }
+  var lerp=function(a,b,t){return a+(b-a)*t;};
+  var clamp=function(v,a,b){return Math.max(a,Math.min(b,v));};
+  var arc=function(t,h){return 4*h*t*(1-t);};
+  function spring(t){
+    if(t<.15){var r=t/.15; return[lerp(1,1.35,r),lerp(1,.55,r)];}
+    if(t<.40){var r=(t-.15)/.25; return[lerp(1.35,.88,r),lerp(.55,1.22,r)];}
+    if(t<.70){var r=(t-.40)/.30; return[lerp(.88,1.04,r),lerp(1.22,.96,r)];}
+    var r=(t-.70)/.30; return[lerp(1.04,1,r),lerp(.96,1,r)];
+  }
+  function air(t){
+    if(t<.45) return[lerp(1,.84,t/.45),lerp(1,1.2,t/.45)];
+    if(t<.82) return[.84,1.2];
+    var r=(t-.82)/.18; return[lerp(.84,1.28,r),lerp(1.2,.68,r)];
+  }
+  function ctr(el){
+    var er=el.getBoundingClientRect(),sr=scene.getBoundingClientRect();
+    return{x:er.left-sr.left+er.width/2,y:er.top-sr.top+er.height/2};
+  }
+  function mv(cx,cy,sx,sy,rot,a){
+    logo.style.transform='translate('+(cx-LS/2)+'px,'+(cy-LS/2)+'px) rotate('+rot+'rad) scale('+sx+','+sy+')';
+    logo.style.opacity=a;
+  }
+  var phase='intro',t0=null,idx=0,hop=null,done=false;
+  var lpos=[],spos=null;
+  var lsq=spans.map(function(){return{at:-1};});
+  var lsqAt=-1,lsX=1,lsY=1;
+  function uLS(now){
+    for(var i=0;i<spans.length;i++){
+      if(lsq[i].at<0) continue;
+      var t=clamp((now-lsq[i].at)/SQD,0,1),res=spring(t);
+      spans[i].style.transform='scaleX('+res[0]+') scaleY('+res[1]+')';
+      spans[i].style.color=t<.28?'#6fa8ff':'rgba(255,255,255,.55)';
+      if(t>=1){lsq[i].at=-1;spans[i].style.transform='';spans[i].style.color='';}
+    }
+  }
+  function uLogo(now){
+    if(lsqAt<0) return;
+    var t=clamp((now-lsqAt)/LSQ,0,1),res=spring(t);
+    lsX=res[0];lsY=res[1];
+    if(t>=1){lsqAt=-1;lsX=lsY=1;}
+  }
+  function tLogo(now){lsqAt=now;lsX=1.3;lsY=0.62;}
+  function sh(from,to,h,dur,now){hop={from:{x:from.x,y:from.y},to:{x:to.x,y:to.y},h:h,dur:dur,t0:now};}
+  function frame(now){
+    if(!t0) t0=now;
+    uLS(now);uLogo(now);
+    if(phase==='intro'){
+      var t=clamp((now-t0)/ID,0,1);
+      row.style.opacity=t; mv(-200,0,1,1,0,0);
+      if(t>=1){
+        lpos=spans.map(ctr);spos=ctr(slotEl);
+        var li=spans.length-1;
+        phase='hop';idx=li;t0=now;
+        sh({x:lpos[li].x+55,y:spos.y},{x:lpos[li].x,y:spos.y},40,HD,now);
+      }
+    } else if(phase==='hop'){
+      if(hop){
+        var ht=clamp((now-hop.t0)/hop.dur,0,1);
+        var lx=lerp(hop.from.x,hop.to.x,ht);
+        var ly=lerp(hop.from.y,hop.to.y,ht)-arc(ht,hop.h);
+        var rot=(ht<0.5?1:-1)*Math.sin(Math.PI*ht)*0.22;
+        var sh2=lsqAt>=0?[lsX,lsY]:air(ht);
+        mv(lx,ly,sh2[0],sh2[1],rot,1);
+        if(ht>=1){
+          lsq[idx].at=now;tLogo(now);
+          var fx=hop.to.x,fy=hop.to.y;idx--;
+          if(idx>=0){sh({x:fx,y:fy},{x:lpos[idx].x,y:spos.y},40,HD,now);}
+          else{phase='final';t0=now;sh({x:fx,y:fy},{x:spos.x,y:spos.y},70,FHD,now);}
+        }
+      }
+    } else if(phase==='final'){
+      if(hop){
+        var ht=clamp((now-hop.t0)/hop.dur,0,1);
+        var lx=lerp(hop.from.x,hop.to.x,ht);
+        var ly=lerp(hop.from.y,hop.to.y,ht)-arc(ht,hop.h);
+        var rot=(ht<0.5?1:-1)*Math.sin(Math.PI*ht)*0.18;
+        var sh2=lsqAt>=0?[lsX,lsY]:air(ht);
+        mv(lx,ly,sh2[0],sh2[1],rot,1);
+        if(ht>=1){phase='done';tLogo(now);mv(spos.x,spos.y,lsX,lsY,0,1);logo.classList.add('pw-glow');}
+      }
+    } else if(phase==='done'){
+      mv(spos.x,spos.y,lsX,lsY,0,1);
+      if(!done){done=true;return;}
+      return;
+    }
+    requestAnimationFrame(frame);
+  }
+  var started=false;
+  function start(){if(started)return;started=true;row.style.opacity='0';mv(-200,0,1,1,0,0);requestAnimationFrame(frame);}
+  function init(){
+    var obs=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){if(e.isIntersecting){start();obs.disconnect();}});
+    },{threshold:THR});
+    obs.observe(scene);
+  }
+  if(logo.complete){init();}else{logo.onload=init;logo.onerror=init;setTimeout(init,400);}
+},100);
+</script>
+</body>
+</html>
